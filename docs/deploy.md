@@ -8,17 +8,17 @@ firewall-cmd --add-port={3000,9090,9100}/tcp --permanent
 firewall-cmd --reload
 
 ## 2.部署Prometheus（二进制包）
-# 下载解压
+### 下载解压
 wget https://github.com/prometheus/prometheus/releases/download/v2.53.0/prometheus-2.53.0.linux-amd64.tar.gz
 tar -zxvf prometheus-2.53.0.linux-amd64.tar.gz
 mv prometheus-2.53.0.linux-amd64 /usr/local/prometheus
 cd /usr/local/prometheus
 
-# 加载服务、启动、设置开机自启
+### 加载服务、启动、设置开机自启
 systemctl daemon-reload
 systemctl start prometheus
 systemctl enable prometheus
-# 查看状态
+### 查看状态
 systemctl status prometheus
 访问地址：`http://虚拟机IP:9090`
 
@@ -28,7 +28,7 @@ tar -zxvf node_exporter-1.8.2.linux-amd64.tar.gz
 mv node_exporter-1.8.2.linux-amd64 /usr/local/node_exporter
 cd /usr/local/node_exporter
 
-# 加载服务、启动、设置开机自启
+### 加载服务、启动、设置开机自启
 systemctl daemon-reload
 systemctl start node_exporter
 systemctl enable node_exporter
@@ -42,7 +42,7 @@ systemctl enable node_exporter
 systemctl restart prometheus
 
 ## 5. 部署 Grafana
-# 安装grafana rpm包
+### 安装grafana rpm包
 wget https://dl.grafana.com/oss/release/grafana-11.2.0-1.x86_64.rpm
 rpm -ivh grafana-11.2.0-1.x86_64.rpm
 
@@ -56,13 +56,13 @@ systemctl enable grafana-server
 2. 导入 Linux 主机监控 Dashboard 模板（ID：1860）
 3. 选择 `linux‑node` 对应的 job，即可展示 CPU、内存、磁盘、网络监控图表
 
-# 全部启动
+### 全部启动
 systemctl start prometheus node_exporter grafana-server
 
-# 全部停止
+### 全部停止
 systemctl stop prometheus node_exporter grafana-server
 
-# 查看各组件运行状态
+### 查看各组件运行状态
 systemctl status prometheus
 systemctl status node_exporter
 systemctl status grafana-server
